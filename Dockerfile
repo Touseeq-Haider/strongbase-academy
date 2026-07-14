@@ -17,6 +17,9 @@ COPY . .
 # Composer dependencies install (production mode)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# .env file banana (Render environment variables inhe override kar dete hain, ye sirf artisan ke liye file exist karne ke liye hai)
+RUN cp .env.example .env
+
 # Storage aur cache folders writable banana
 RUN chmod -R 777 storage bootstrap/cache
 
