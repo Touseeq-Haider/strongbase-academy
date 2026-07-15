@@ -17,8 +17,9 @@ COPY . .
 # Composer dependencies install (production mode)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# .env file banana (Render environment variables inhe override kar dete hain, ye sirf artisan ke liye file exist karne ke liye hai)
-RUN cp .env.example .env
+# .env file: humne saari production values pehle se is file mein bhar di hain
+# (Render ke dashboard Environment Variables kisi wajah se container tak nahi pohonch rahe thay)
+COPY .env.render .env
 
 # Storage aur cache folders writable banana
 RUN chmod -R 777 storage bootstrap/cache
