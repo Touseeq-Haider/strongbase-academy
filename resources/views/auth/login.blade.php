@@ -11,8 +11,9 @@
             display: flex;
             align-items: center;
             background: linear-gradient(135deg,#1e2a3a,#2d3e50);
+            padding: 20px;
         }
-        .login-card { max-width: 400px; margin: auto; border: none; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+        .login-card { max-width: 400px; width: 100%; margin: auto; border: none; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     </style>
 </head>
 <body>

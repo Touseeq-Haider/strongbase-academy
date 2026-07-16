@@ -73,6 +73,7 @@
         </form>
     </div>
 
+    <div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -138,6 +139,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     {{ $fees->links() }}
 </div>
 @endsection

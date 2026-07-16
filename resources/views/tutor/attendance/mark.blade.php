@@ -11,6 +11,7 @@
         <input type="hidden" name="subject_id" value="{{ $subject->id }}">
         <input type="hidden" name="date" value="{{ $date }}">
 
+        <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -40,6 +41,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
 
         @if ($students->count() > 0)
             <button type="submit" class="btn btn-dark">Attendance Save Karein</button>

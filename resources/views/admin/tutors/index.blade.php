@@ -8,6 +8,7 @@
 </div>
 
 <div class="card p-3">
+    <div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -46,6 +47,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     {{ $tutors->links() }}
 </div>
 @endsection

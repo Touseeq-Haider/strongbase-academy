@@ -6,6 +6,11 @@
 <style>
     body{ font-family: 'Segoe UI', Arial, sans-serif; background:#eee; margin:0; padding:30px; }
     .receipt{ max-width:600px; margin:auto; background:#fff; padding:40px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.1); }
+    @media (max-width:600px){
+        body{ padding:12px; }
+        .receipt{ padding:22px; }
+        td{ font-size:.85rem; }
+    }
     .header{ text-align:center; border-bottom:2px solid #182642; padding-bottom:16px; margin-bottom:24px; }
     .header h1{ margin:0; font-size:1.4rem; color:#182642; }
     .header p{ margin:4px 0 0; color:#666; font-size:.85rem; }

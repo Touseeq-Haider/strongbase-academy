@@ -5,6 +5,7 @@
 <h5 class="mb-3">Attendance History</h5>
 
 <div class="card p-3">
+    <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -35,6 +36,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     {{ $attendances->links() }}
 </div>
 @endsection

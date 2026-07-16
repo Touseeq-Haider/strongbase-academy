@@ -5,6 +5,7 @@
 <h5 class="mb-3">Admission Inquiries</h5>
 
 <div class="card p-3">
+    <div class="table-responsive">
     <table class="table table-hover align-middle">
         <thead>
             <tr>
@@ -41,6 +42,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     {{ $inquiries->links() }}
 </div>
 @endsection

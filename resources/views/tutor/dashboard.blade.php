@@ -30,6 +30,7 @@
 
 <div class="card p-3">
     <h6 class="mb-3">Aapke Subjects</h6>
+    <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -55,5 +56,6 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 @endsection

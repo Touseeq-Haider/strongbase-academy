@@ -12,6 +12,8 @@
             min-height: 100vh;
             background: #1e2a3a;
             color: #fff;
+            width: 230px;
+            flex-shrink: 0;
         }
         .sidebar a {
             color: #c7d0da;
@@ -42,11 +44,65 @@
         .card-stat:hover { box-shadow: 0 6px 16px rgba(0,0,0,.09); transform: translateY(-1px); }
         .table-hover tbody tr:hover { background-color: rgba(0,0,0,.02); }
         .badge { font-weight: 500; }
+
+        /* ---------- Mobile Responsive ---------- */
+        .sidebar-close-btn { display: none; }
+        .mobile-toggle { display: none; }
+        .sidebar-backdrop { display: none; }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                z-index: 1050;
+                transform: translateX(-100%);
+                transition: transform .3s ease;
+                overflow-y: auto;
+            }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-close-btn {
+                display: block;
+                position: absolute;
+                top: 14px;
+                right: 14px;
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 1.3rem;
+            }
+            .mobile-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 38px; height: 38px;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                background: #fff;
+                margin-right: 10px;
+            }
+            .sidebar-backdrop {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,.4);
+                z-index: 1040;
+            }
+            .sidebar-backdrop.show { display: block; }
+            .top-navbar { flex-wrap: wrap; gap: 8px; }
+            .top-navbar .fw-semibold { font-size: .95rem; }
+            .top-navbar form button span.logout-text { display: none; }
+            .p-4 { padding: 1rem !important; }
+            table { font-size: .85rem; }
+        }
     </style>
 </head>
 <body>
 <div class="d-flex">
-    <div class="sidebar" style="width:230px;">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close-btn" id="sidebarClose"><i class="fa-solid fa-xmark"></i></button>
         <div class="brand">🎓 Strong Base Academy</div>
         <nav class="mt-2">
             <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
@@ -70,13 +126,14 @@
         </nav>
     </div>
 
-    <div class="flex-grow-1">
-        <nav class="navbar navbar-light bg-white border-bottom px-4">
-            <span class="fw-semibold">@yield('title', 'Dashboard')</span>
+    <div class="flex-grow-1" style="min-width:0;">
+        <nav class="navbar navbar-light bg-white border-bottom px-3 px-md-4 top-navbar">
+            <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+            <span class="fw-semibold flex-grow-1">@yield('title', 'Dashboard')</span>
             <form action="{{ route('logout') }}" method="POST" class="m-0">
                 @csrf
                 <button class="btn btn-sm btn-outline-danger">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout ({{ auth()->user()->name }})
+                    <i class="fa-solid fa-right-from-bracket"></i> <span class="logout-text">Logout ({{ auth()->user()->name }})</span>
                 </button>
             </form>
         </nav>
@@ -101,5 +158,23 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const openBtn = document.getElementById('mobileToggle');
+    const closeBtn = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        backdrop.classList.add('show');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('show');
+    }
+    openBtn?.addEventListener('click', openSidebar);
+    closeBtn?.addEventListener('click', closeSidebar);
+    backdrop?.addEventListener('click', closeSidebar);
+</script>
 </body>
 </html>
