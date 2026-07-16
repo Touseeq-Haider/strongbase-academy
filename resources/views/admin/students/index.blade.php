@@ -38,14 +38,14 @@
                     </td>
                     <td class="text-end">
                         <a href="{{ route('admin.students.edit', $student) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="d-inline" onsubmit="return confirm('Pakka delete karna hai?');">
+                        <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this student?');">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="7" class="text-center text-muted py-4">Koi student abhi tak add nahi hua.</td></tr>
+                <tr><td colspan="7" class="text-center text-muted py-4">No students have been added yet.</td></tr>
             @endforelse
         </tbody>
     </table>

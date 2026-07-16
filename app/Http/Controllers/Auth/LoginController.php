@@ -28,14 +28,14 @@ class LoginController extends Controller
 
             if (! Auth::user()->is_active) {
                 Auth::logout();
-                return back()->withErrors(['email' => 'Ye account inactive hai. Admin se rabta karein.']);
+                return back()->withErrors(['email' => 'This account is inactive. Please contact the administrator.']);
             }
 
             return $this->redirectByRole();
         }
 
         return back()->withErrors([
-            'email' => 'Email ya password ghalat hai.',
+            'email' => 'These credentials do not match our records.',
         ])->onlyInput('email');
     }
 

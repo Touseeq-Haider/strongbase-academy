@@ -39,7 +39,7 @@
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                <label class="form-check-label" for="remember">Mujhe yaad rakhein</label>
+                <label class="form-check-label" for="remember">Remember me</label>
             </div>
             <button type="submit" class="btn btn-dark w-100">Login</button>
         </form>

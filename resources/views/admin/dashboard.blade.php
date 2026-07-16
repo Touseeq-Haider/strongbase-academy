@@ -7,7 +7,7 @@
 <div class="alert alert-danger d-flex align-items-start gap-3 mb-4" style="border-radius:10px;">
     <i class="fa-solid fa-triangle-exclamation fs-4 mt-1"></i>
     <div class="flex-grow-1">
-        <strong>{{ $overdueFees->count() }} fee(s) overdue hain</strong> — total Rs. {{ number_format($overdueFees->sum(fn($f) => $f->amount - $f->paid_amount), 0) }} pending.
+        <strong>{{ $overdueFees->count() }} fee(s) overdue</strong> — total Rs. {{ number_format($overdueFees->sum(fn($f) => $f->amount - $f->paid_amount), 0) }} pending.
         <div class="mt-2 d-flex flex-wrap gap-2">
             @foreach ($overdueFees->take(5) as $fee)
                 <span class="badge bg-white text-danger border border-danger">
@@ -19,7 +19,7 @@
             @endif
         </div>
     </div>
-    <a href="{{ route('admin.fees.index') }}" class="btn btn-sm btn-danger">Fees Dekhein</a>
+    <a href="{{ route('admin.fees.index') }}" class="btn btn-sm btn-danger">View Fees</a>
 </div>
 @endif
 
@@ -71,9 +71,9 @@
 </div>
 
 <div class="mt-3 mb-4">
-    <a href="{{ route('admin.students.create') }}" class="btn btn-dark btn-sm me-2"><i class="fa-solid fa-plus"></i> Naya Student</a>
-    <a href="{{ route('admin.tutors.create') }}" class="btn btn-outline-dark btn-sm me-2"><i class="fa-solid fa-plus"></i> Naya Tutor</a>
-    <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-envelope"></i> Inquiries Dekhein</a>
+    <a href="{{ route('admin.students.create') }}" class="btn btn-dark btn-sm me-2"><i class="fa-solid fa-plus"></i> Add Student</a>
+    <a href="{{ route('admin.tutors.create') }}" class="btn btn-outline-dark btn-sm me-2"><i class="fa-solid fa-plus"></i> Add Tutor</a>
+    <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-envelope"></i> View Inquiries</a>
 </div>
 
 <div class="row g-3">

@@ -3,12 +3,12 @@
 
 @section('content')
 <div class="card p-4" style="max-width:700px;">
-    <h5 class="mb-3">Naya Student Add Karein</h5>
+    <h5 class="mb-3">Add New Student</h5>
     <form method="POST" action="{{ route('admin.students.store') }}">
         @csrf
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Naam</label>
+                <label class="form-label">Full Name</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
             </div>
             <div class="col-md-6">
@@ -38,8 +38,8 @@
         </div>
 
         <hr class="my-4">
-        <label class="form-label fw-semibold">Subjects aur Tutor Assign Karein</label>
-        <p class="text-muted small">Jo subject select karenge uske saamne tutor bhi choose karna zaroori hai.</p>
+        <label class="form-label fw-semibold">Assign Subjects and Tutors</label>
+        <p class="text-muted small">For every subject you select, you must also choose a tutor.</p>
 
         @foreach ($subjects as $subject)
             <div class="row align-items-center mb-2 border-bottom pb-2">
@@ -49,7 +49,7 @@
                 <div class="col-md-4">{{ $subject->name }} <span class="text-muted small">({{ $subject->level }})</span></div>
                 <div class="col-md-7">
                     <select name="tutor_for_subject[{{ $subject->id }}]" class="form-select form-select-sm">
-                        <option value="">-- Tutor Select Karein --</option>
+                        <option value="">-- Select Tutor --</option>
                         @foreach ($tutors as $tutor)
                             <option value="{{ $tutor->id }}">{{ $tutor->user->name }}</option>
                         @endforeach

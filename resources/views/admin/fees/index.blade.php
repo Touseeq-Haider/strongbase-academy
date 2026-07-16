@@ -10,7 +10,7 @@
                 <i class="fa-solid fa-sack-dollar text-dark"></i>
             </div>
             <div>
-                <div class="text-muted small">Total Amount (Is Month)</div>
+                <div class="text-muted small">Total Amount (This Month)</div>
                 <div class="fs-4 fw-bold">Rs. {{ number_format($summary['total'], 0) }}</div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <i class="fa-solid fa-check text-success"></i>
             </div>
             <div>
-                <div class="text-muted small">Collected (Is Month)</div>
+                <div class="text-muted small">Collected (This Month)</div>
                 <div class="fs-4 fw-bold text-success">Rs. {{ number_format($summary['collected'], 0) }}</div>
             </div>
         </div>
@@ -40,7 +40,7 @@
 </div>
 
 <div class="card p-3 mb-4">
-    <h6 class="mb-3"><i class="fa-solid fa-plus text-muted me-1"></i> Naye Month Ki Fees Generate Karein</h6>
+    <h6 class="mb-3"><i class="fa-solid fa-plus text-muted me-1"></i> Generate Fees for a New Month</h6>
     <form method="POST" action="{{ route('admin.fees.generate') }}" class="row g-2 align-items-end">
         @csrf
         <div class="col-md-3">
@@ -55,7 +55,7 @@
             <button type="submit" class="btn btn-dark">Generate Fees</button>
         </div>
     </form>
-    <p class="text-muted small mt-2 mb-0">Ye har active student ke liye us month ki fee entry bana dega (agar pehle se nahi bani).</p>
+    <p class="text-muted small mt-2 mb-0">This will create a fee entry for the selected month for every active student (skipped if one already exists).</p>
 </div>
 
 <div class="card p-3">
@@ -64,7 +64,7 @@
         <form method="GET" class="d-flex gap-2">
             <input type="month" name="month" value="{{ $month }}" class="form-control form-control-sm">
             <select name="status" class="form-select form-select-sm">
-                <option value="">Sab Status</option>
+                <option value="">All Statuses</option>
                 <option value="unpaid" {{ $status == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
                 <option value="partial" {{ $status == 'partial' ? 'selected' : '' }}>Partial</option>
                 <option value="paid" {{ $status == 'paid' ? 'selected' : '' }}>Paid</option>
@@ -125,7 +125,7 @@
                             @if($fee->status != 'paid')
                                 @php
                                     $balance = $fee->amount - $fee->paid_amount;
-                                    $msg = "Assalam o Alaikum! {$fee->student->name} ki {$fee->due_date->translatedFormat('F')} ki fee Rs. " . number_format($balance, 0) . " abhi baaki hai. Barah e karam jald ada karein. - Strong Base Academy";
+                                    $msg = "Hello! The {$fee->due_date->translatedFormat('F')} fee of Rs. " . number_format($balance, 0) . " for {$fee->student->name} is still outstanding. Kindly arrange payment at your earliest convenience. - Strong Base Academy";
                                 @endphp
                                 <a href="https://wa.me/{{ $fee->student->whatsappPhone() }}?text={{ urlencode($msg) }}" target="_blank" class="btn btn-sm btn-outline-success">
                                     <i class="fa-brands fa-whatsapp"></i> Remind
@@ -135,7 +135,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-center text-muted py-4">Is month/status ke liye koi fee record nahi mila. Upar se generate karein.</td></tr>
+                <tr><td colspan="6" class="text-center text-muted py-4">No fee records found for this month/status. Use the form above to generate them.</td></tr>
             @endforelse
         </tbody>
     </table>

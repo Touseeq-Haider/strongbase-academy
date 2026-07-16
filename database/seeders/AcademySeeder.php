@@ -16,7 +16,7 @@ class AcademySeeder extends Seeder
             ['email' => 'admin@strongbase.test'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password123'), // login ke baad zaroor change karein
+                'password' => Hash::make('password123'), // be sure to change this after first login
                 'role' => 'admin',
                 'is_active' => true,
             ]

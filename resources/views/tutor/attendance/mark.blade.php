@@ -37,16 +37,16 @@
                         </td>
                     </tr>
                 @empty
-                    <tr><td colspan="4" class="text-center text-muted py-3">Is subject me koi student enrolled nahi hai.</td></tr>
+                    <tr><td colspan="4" class="text-center text-muted py-3">No students are enrolled in this subject.</td></tr>
                 @endforelse
             </tbody>
         </table>
         </div>
 
         @if ($students->count() > 0)
-            <button type="submit" class="btn btn-dark">Attendance Save Karein</button>
+            <button type="submit" class="btn btn-dark">Save Attendance</button>
         @endif
-        <a href="{{ route('tutor.attendance.select') }}" class="btn btn-outline-secondary">Wapis</a>
+        <a href="{{ route('tutor.attendance.select') }}" class="btn btn-outline-secondary">Back</a>
     </form>
 </div>
 @endsection

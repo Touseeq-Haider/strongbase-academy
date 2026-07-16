@@ -3,12 +3,12 @@
 
 @section('content')
 <div class="card p-4" style="max-width:700px;">
-    <h5 class="mb-3">Student Edit Karein — {{ $student->student_code }}</h5>
+    <h5 class="mb-3">Edit Student — {{ $student->student_code }}</h5>
     <form method="POST" action="{{ route('admin.students.update', $student) }}">
         @csrf @method('PUT')
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Naam</label>
+                <label class="form-label">Full Name</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name', $student->name) }}" required>
             </div>
             <div class="col-md-6">
@@ -51,7 +51,7 @@
                 <div class="col-md-4">{{ $subject->name }} <span class="text-muted small">({{ $subject->level }})</span></div>
                 <div class="col-md-7">
                     <select name="tutor_for_subject[{{ $subject->id }}]" class="form-select form-select-sm">
-                        <option value="">-- Tutor Select Karein --</option>
+                        <option value="">-- Select Tutor --</option>
                         @foreach ($tutors as $tutor)
                             <option value="{{ $tutor->id }}" {{ ($currentTutorMap[$subject->id] ?? null) == $tutor->id ? 'selected' : '' }}>
                                 {{ $tutor->user->name }}

@@ -61,7 +61,7 @@ class StudentController extends Controller
         }
 
         return redirect()->route('admin.students.index')
-            ->with('success', "Student '{$student->name}' add ho gaya (Code: {$student->student_code}).");
+            ->with('success', "Student '{$student->name}' has been added successfully (Code: {$student->student_code}).");
     }
 
     public function edit(Student $student)
@@ -99,8 +99,8 @@ class StudentController extends Controller
             'is_active' => $request->boolean('is_active'),
         ]);
 
-        // Agar current month ki fee already generate ho chuki hai aur abhi tak poori paid nahi hui,
-        // to uska amount bhi naye monthly_fee ke mutabiq update kar dein (paid amount ko touch nahi karte)
+        // If the current month's fee has already been generated and is not fully paid,
+        // update its amount to match the new monthly_fee (paid amount is left untouched)
         $student->fees()
             ->where('month', date('Y-m'))
             ->where('status', '!=', 'paid')
@@ -118,12 +118,12 @@ class StudentController extends Controller
             }
         }
 
-        return redirect()->route('admin.students.index')->with('success', 'Student update ho gaya.');
+        return redirect()->route('admin.students.index')->with('success', 'Student updated successfully.');
     }
 
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('admin.students.index')->with('success', 'Student remove ho gaya.');
+        return redirect()->route('admin.students.index')->with('success', 'Student removed successfully.');
     }
 }

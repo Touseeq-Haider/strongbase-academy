@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         $tutor = $request->user()->tutor()->with('subjects')->firstOrFail();
 
-        // Har subject ke liye kitne students enrolled hain (isi tutor ke through)
+        // Number of students enrolled per subject (through this tutor)
         $subjectStats = $tutor->subjects->map(function ($subject) use ($tutor) {
             $count = $tutor->enrollments()->where('subject_id', $subject->id)->count();
             return [

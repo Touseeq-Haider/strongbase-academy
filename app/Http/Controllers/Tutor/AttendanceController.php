@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    // Step 1: Tutor subject aur date choose karta hai
+    // Step 1: Tutor selects a subject and date
     public function selectForm(Request $request)
     {
         $tutor = $request->user()->tutor;
@@ -18,7 +18,7 @@ class AttendanceController extends Controller
         return view('tutor.attendance.select', compact('subjects'));
     }
 
-    // Step 2: Us subject ke enrolled students ki list dikhana, marking ke liye
+    // Step 2: Show the list of students enrolled in that subject, for marking
     public function markForm(Request $request)
     {
         $request->validate([
@@ -30,14 +30,14 @@ class AttendanceController extends Controller
         $subject = Subject::findOrFail($request->subject_id);
         $date = $request->date;
 
-        // Sirf wo students jo is tutor ke through, is subject me enrolled hain
+        // Only students enrolled in this subject through this tutor
         $students = $tutor->enrollments()
             ->where('subject_id', $subject->id)
             ->with('student')
             ->get()
             ->pluck('student');
 
-        // Agar is date ki attendance pehle se maujood hai to wo bhi le aayein (edit ke liye)
+        // If attendance for this date already exists, load it too (for editing)
         $existing = Attendance::where('tutor_id', $tutor->id)
             ->where('subject_id', $subject->id)
             ->whereDate('date', $date)
@@ -46,7 +46,7 @@ class AttendanceController extends Controller
         return view('tutor.attendance.mark', compact('subject', 'students', 'date', 'existing'));
     }
 
-    // Step 3: Attendance save karna
+    // Step 3: Save attendance
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -71,10 +71,10 @@ class AttendanceController extends Controller
             );
         }
 
-        return redirect()->route('tutor.dashboard')->with('success', 'Attendance save ho gayi.');
+        return redirect()->route('tutor.dashboard')->with('success', 'Attendance has been saved successfully.');
     }
 
-    // History dekhne ke liye
+    // View attendance history
     public function history(Request $request)
     {
         $tutor = $request->user()->tutor;

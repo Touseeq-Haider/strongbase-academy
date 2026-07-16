@@ -3,7 +3,7 @@
 
 @section('content')
 <h4 class="mb-1">Welcome, {{ auth()->user()->name }} 👋</h4>
-<p class="text-muted">Aaj ka overview aur apne subjects</p>
+<p class="text-muted">Today's overview and your assigned subjects</p>
 
 <div class="row g-3 mb-4">
     <div class="col-md-4">
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-4">
         <div class="card card-stat p-3">
-            <div class="text-muted small">Aaj Attendance Mark Hui</div>
+            <div class="text-muted small">Attendance Marked Today</div>
             <div class="fs-3 fw-bold {{ $todayAttendanceCount > 0 ? 'text-success' : 'text-danger' }}">
                 {{ $todayAttendanceCount }}
             </div>
@@ -29,7 +29,7 @@
 </div>
 
 <div class="card p-3">
-    <h6 class="mb-3">Aapke Subjects</h6>
+    <h6 class="mb-3">Your Subjects</h6>
     <div class="table-responsive">
     <table class="table table-hover">
         <thead>
@@ -52,7 +52,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="4" class="text-center text-muted py-3">Abhi koi subject assign nahi hua. Admin se rabta karein.</td></tr>
+                <tr><td colspan="4" class="text-center text-muted py-3">No subjects have been assigned yet. Please contact the administrator.</td></tr>
             @endforelse
         </tbody>
     </table>

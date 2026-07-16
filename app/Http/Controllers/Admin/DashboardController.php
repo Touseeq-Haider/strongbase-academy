@@ -22,7 +22,7 @@ class DashboardController extends Controller
             'new_inquiries' => Inquiry::where('status', 'new')->count(),
         ];
 
-        // Overdue fees: due date guzar chuki hai aur abhi tak poori paid nahi hui
+        // Overdue fees: due date has passed and the fee is not yet fully paid
         $overdueFees = Fee::with('student')
             ->where('status', '!=', 'paid')
             ->whereDate('due_date', '<', now())

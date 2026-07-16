@@ -31,6 +31,6 @@ class HomeController extends Controller
 
         Inquiry::create($validated);
 
-        return back()->with('success', 'Shukriya! Aapki inquiry mil gayi hai, hum jald hi rabta karenge.');
+        return back()->with('success', 'Thank you! We have received your inquiry and will contact you shortly.');
     }
 }

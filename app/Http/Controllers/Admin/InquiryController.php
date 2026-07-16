@@ -18,6 +18,6 @@ class InquiryController extends Controller
     {
         $request->validate(['status' => 'required|in:new,contacted,enrolled,not_interested']);
         $inquiry->update(['status' => $request->status]);
-        return back()->with('success', 'Inquiry status update ho gaya.');
+        return back()->with('success', 'Inquiry status updated successfully.');
     }
 }

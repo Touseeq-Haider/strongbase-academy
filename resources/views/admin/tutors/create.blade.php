@@ -3,12 +3,12 @@
 
 @section('content')
 <div class="card p-4" style="max-width:650px;">
-    <h5 class="mb-3">Naya Tutor Add Karein</h5>
+    <h5 class="mb-3">Add New Tutor</h5>
     <form method="POST" action="{{ route('admin.tutors.store') }}">
         @csrf
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Naam</label>
+                <label class="form-label">Full Name</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
             </div>
             <div class="col-md-6">
@@ -34,7 +34,7 @@
         </div>
 
         <hr class="my-3">
-        <label class="form-label fw-semibold">Subjects (jo ye tutor parha sakta hai)</label>
+        <label class="form-label fw-semibold">Subjects (this tutor is qualified to teach)</label>
         <div class="row">
             @foreach ($subjects as $subject)
                 <div class="col-md-6">

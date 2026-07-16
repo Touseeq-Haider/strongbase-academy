@@ -31,7 +31,7 @@ class FeeController extends Controller
         return view('admin.fees.index', compact('fees', 'month', 'status', 'summary'));
     }
 
-    // Ek click me sab active students ke liye is month ki fee entry bana deta hai
+    // Generates a fee entry for every active student for the given month, in one click
     public function generate(Request $request)
     {
         $validated = $request->validate([
@@ -61,10 +61,10 @@ class FeeController extends Controller
         }
 
         return redirect()->route('admin.fees.index', ['month' => $month])
-            ->with('success', "{$created} naye fee records generate hue is month ke liye.");
+            ->with('success', "{$created} new fee record(s) generated for this month.");
     }
 
-    // Fee ka amount aur paid_amount dono update karna (paid/partial/unpaid khud decide hota hai)
+    // Updates both the fee amount and paid amount (status is determined automatically: paid/partial/unpaid)
     public function updateStatus(Request $request, Fee $fee)
     {
         $validated = $request->validate([
@@ -89,7 +89,7 @@ class FeeController extends Controller
             'paid_date' => $status !== 'unpaid' ? now() : null,
         ]);
 
-        return back()->with('success', "Fee update ho gayi: {$fee->student->name} — " . ucfirst($status));
+        return back()->with('success', "Fee updated for {$fee->student->name} — " . ucfirst($status));
     }
 
     // Printable receipt for a fee payment

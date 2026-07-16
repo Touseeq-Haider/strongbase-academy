@@ -23,13 +23,13 @@ class PasswordController extends Controller
         $user = $request->user();
 
         if (! Hash::check($validated['current_password'], $user->password)) {
-            return back()->withErrors(['current_password' => 'Current password ghalat hai.']);
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
         }
 
         $user->update([
             'password' => Hash::make($validated['new_password']),
         ]);
 
-        return back()->with('success', 'Password successfully change ho gaya.');
+        return back()->with('success', 'Your password has been updated successfully.');
     }
 }

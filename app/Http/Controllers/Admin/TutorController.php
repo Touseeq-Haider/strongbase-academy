@@ -53,7 +53,7 @@ class TutorController extends Controller
         $tutor->subjects()->sync($validated['subjects']);
 
         return redirect()->route('admin.tutors.index')
-            ->with('success', "Tutor '{$user->name}' add ho gaya. Login email: {$user->email}");
+            ->with('success', "Tutor '{$user->name}' has been added successfully. Login email: {$user->email}");
     }
 
     public function edit(Tutor $tutor)
@@ -90,12 +90,12 @@ class TutorController extends Controller
 
         $tutor->subjects()->sync($validated['subjects']);
 
-        return redirect()->route('admin.tutors.index')->with('success', 'Tutor update ho gaya.');
+        return redirect()->route('admin.tutors.index')->with('success', 'Tutor updated successfully.');
     }
 
     public function destroy(Tutor $tutor)
     {
         $tutor->user()->delete(); // cascades to tutor row via FK
-        return redirect()->route('admin.tutors.index')->with('success', 'Tutor remove ho gaya.');
+        return redirect()->route('admin.tutors.index')->with('success', 'Tutor removed successfully.');
     }
 }

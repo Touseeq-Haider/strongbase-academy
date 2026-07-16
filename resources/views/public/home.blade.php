@@ -178,7 +178,7 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
         <div class="reveal in">
             <div class="eyebrow"><span class="dot"></span> Home Tuition Academy</div>
             <h1>Building a<br><span class="accent">strong base,</span><br>one subject at a time</h1>
-            <p class="lead">Primary se A-Levels tak — qualified tutors, small groups, aur monthly progress tracking. Aapke bacchay ki taleem, hamari zimmedari.</p>
+            <p class="lead">From Primary through A-Levels — qualified tutors, small groups, and monthly progress tracking. Your child's education is our responsibility.</p>
             <div class="hero-ctas">
                 <a href="#admission" class="btn-primary">Free Demo Class <i class="fa-solid fa-arrow-right"></i></a>
                 <a href="#courses" class="btn-secondary">Explore Courses</a>
@@ -218,7 +218,7 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 <section class="section" id="courses">
     <div class="container">
         <div class="section-head reveal">
-            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Kya Parhate Hain</div>
+            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> What We Teach</div>
             <h2>Courses by Level</h2>
         </div>
         <div class="level-path reveal">
@@ -265,7 +265,7 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 <section class="section" id="tutors">
     <div class="container">
         <div class="section-head reveal">
-            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Hamari Team</div>
+            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Our Team</div>
             <h2>Qualified Tutors</h2>
         </div>
         <div class="card-grid reveal-stagger">
@@ -295,7 +295,7 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
                 <div>
                     <div class="eyebrow" style="background:rgba(227,168,87,.15);"><span class="dot"></span> Admission Inquiry</div>
                     <h2>Book a Free Demo Class</h2>
-                    <p>Form fill karein, hamari team 24 ghanton mein aapse rabta karegi.</p>
+                    <p>Fill out the form and our team will get back to you within 24 hours.</p>
                 </div>
                 <div>
                     @if(session('success'))
@@ -303,10 +303,10 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
                     @endif
                     <form method="POST" action="{{ route('inquiry.store') }}">
                         @csrf
-                        <div class="field"><input type="text" name="name" placeholder="Student ka naam" value="{{ old('name') }}" required></div>
+                        <div class="field"><input type="text" name="name" placeholder="Student's full name" value="{{ old('name') }}" required></div>
                         <div class="field"><input type="text" name="phone" placeholder="Phone number" value="{{ old('phone') }}" required></div>
                         <div class="field"><input type="text" name="class_level" placeholder="Class / Level (e.g. Class 9, FSc)" value="{{ old('class_level') }}" required></div>
-                        <div class="field"><textarea name="message" rows="3" placeholder="Koi aur detail (optional)">{{ old('message') }}</textarea></div>
+                        <div class="field"><textarea name="message" rows="3" placeholder="Additional details (optional)">{{ old('message') }}</textarea></div>
                         <button type="submit" class="btn-submit">Send Inquiry</button>
                     </form>
                 </div>

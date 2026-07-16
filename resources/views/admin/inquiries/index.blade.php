@@ -38,7 +38,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-center text-muted py-4">Abhi tak koi inquiry nahi aayi.</td></tr>
+                <tr><td colspan="6" class="text-center text-muted py-4">No inquiries have been received yet.</td></tr>
             @endforelse
         </tbody>
     </table>

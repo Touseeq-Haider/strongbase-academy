@@ -32,7 +32,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="4" class="text-center text-muted py-4">Abhi tak koi attendance record nahi hai.</td></tr>
+                <tr><td colspan="4" class="text-center text-muted py-4">No attendance records found yet.</td></tr>
             @endforelse
         </tbody>
     </table>
