@@ -3,170 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Strong Base Academy — Home Tuition Academy</title>
+<title>Strong Base Academy — Premium Tutoring, Reimagined</title>
+<meta name="description" content="Strong Base Academy pairs students from Primary through A-Levels with expert tutors, real-time progress tracking, and a modern learning experience.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{
-    --ink:#0B2B26; --ink-2:#123C34; --paper:#F7F5F0; --paper-2:#FFFFFF;
-    --gold:#E3A857; --gold-deep:#C4883A; --line:#E1DDD1; --muted:#5B6B65;
+    --bg:#06070C; --bg-2:#0B0E17; --panel:#0F1420; --panel-2:#131829;
+    --border:rgba(255,255,255,.08); --border-soft:rgba(255,255,255,.05);
+    --text:#EDEEF3; --muted:#8B92A8; --muted-2:#5C6480;
+    --violet:#7C6CF6; --cyan:#4CC9F0; --amber:#F0B429; --pink:#F65C9C;
+    --grad-1: linear-gradient(135deg,var(--violet),var(--cyan));
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
-body{ font-family:'Inter',sans-serif; color:var(--ink); background:var(--paper); overflow-x:hidden; }
-h1,h2,h3,.display{ font-family:'Fraunces',serif; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+h1,h2,h3,.display{ font-family:'Space Grotesk',sans-serif; }
 .mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:.04em; }
 a{ color:inherit; }
-.container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+.container{ max-width:1200px; margin:0 auto; padding:0 24px; }
+::selection{ background:var(--violet); color:#fff; }
 
-/* ---------- Reveal Animation ---------- */
-.reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+/* ---------- Scroll progress ---------- */
+#scrollProgress{ position:fixed; top:0; left:0; height:3px; background:var(--grad-1); z-index:999; width:0%; transition:width .1s linear; }
+
+/* ---------- Aurora background ---------- */
+.aurora{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+.aurora .blob{ position:absolute; border-radius:50%; filter:blur(90px); opacity:.35; }
+.blob-1{ width:520px; height:520px; background:var(--violet); top:-120px; left:-100px; animation:drift1 22s ease-in-out infinite; }
+.blob-2{ width:480px; height:480px; background:var(--cyan); top:200px; right:-150px; animation:drift2 26s ease-in-out infinite; }
+.blob-3{ width:420px; height:420px; background:var(--pink); bottom:-150px; left:30%; animation:drift3 20s ease-in-out infinite; }
+@keyframes drift1{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(80px,60px);} }
+@keyframes drift2{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(-60px,80px);} }
+@keyframes drift3{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(60px,-40px);} }
+.noise{ position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- Glass utility ---------- */
+.glass{ background:rgba(255,255,255,.03); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:20px; }
+
+/* ---------- Reveal ---------- */
+.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
 .reveal.in{ opacity:1; transform:translateY(0); }
-.reveal-stagger > * { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+.reveal-stagger > *{ opacity:0; transform:translateY(20px); transition:opacity .55s ease, transform .55s ease; }
 .reveal-stagger.in > *{ opacity:1; transform:translateY(0); }
-.reveal-stagger.in > *:nth-child(1){ transition-delay:.05s; }
-.reveal-stagger.in > *:nth-child(2){ transition-delay:.15s; }
-.reveal-stagger.in > *:nth-child(3){ transition-delay:.25s; }
-.reveal-stagger.in > *:nth-child(4){ transition-delay:.35s; }
+.reveal-stagger.in > *:nth-child(1){ transition-delay:.04s; }
+.reveal-stagger.in > *:nth-child(2){ transition-delay:.12s; }
+.reveal-stagger.in > *:nth-child(3){ transition-delay:.2s; }
+.reveal-stagger.in > *:nth-child(4){ transition-delay:.28s; }
 
-/* ---------- Header ---------- */
-header.site-header{
-    position:fixed; top:0; left:0; width:100%; z-index:100;
-    padding:20px 0; transition:all .35s ease;
-}
-header.site-header.scrolled{
-    background:rgba(247,245,240,0.85); backdrop-filter:blur(12px);
-    box-shadow:0 1px 0 var(--line); padding:14px 0;
-}
+/* ---------- Navbar ---------- */
+header.nav{ position:fixed; top:0; left:0; width:100%; z-index:100; padding:18px 0; transition:all .3s ease; }
+header.nav.scrolled{ padding:12px 0; background:rgba(6,7,12,.7); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-soft); }
 .nav-wrap{ display:flex; align-items:center; justify-content:space-between; }
-.logo{ font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; color:var(--ink); text-decoration:none; }
-.logo em{ font-style:normal; color:var(--gold-deep); }
-.nav-links{ display:flex; align-items:center; gap:32px; list-style:none; }
-.nav-links a{ text-decoration:none; color:var(--ink); font-weight:500; font-size:.92rem; position:relative; }
-.nav-links a:not(.btn-pill)::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--gold); transition:width .3s ease; }
-.nav-links a:not(.btn-pill):hover::after{ width:100%; }
-.btn-pill{ background:var(--ink); color:#fff!important; padding:10px 22px; border-radius:30px; font-weight:600; font-size:.85rem; transition:transform .25s ease, background .25s ease; display:inline-block; }
-.btn-pill:hover{ background:var(--gold-deep); transform:translateY(-2px); }
-.hamburger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
-.hamburger span{ width:24px; height:2px; background:var(--ink); display:block; }
+.logo{ display:flex; align-items:center; gap:9px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem; text-decoration:none; }
+.logo-mark{ width:30px; height:30px; border-radius:9px; background:var(--grad-1); display:flex; align-items:center; justify-content:center; font-size:.85rem; box-shadow:0 0 24px rgba(124,108,246,.5); }
+.nav-links{ display:flex; align-items:center; gap:30px; list-style:none; }
+.nav-links a:not(.btn-pill){ text-decoration:none; color:var(--muted); font-size:.9rem; font-weight:500; transition:color .2s ease; }
+.nav-links a:not(.btn-pill):hover{ color:var(--text); }
+.btn-pill{ background:var(--grad-1); color:#06070C!important; padding:10px 20px; border-radius:30px; font-weight:600; font-size:.85rem; text-decoration:none; transition:transform .25s ease, box-shadow .25s ease; box-shadow:0 0 0 rgba(124,108,246,0); }
+.btn-pill:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,108,246,.4); }
+.hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; }
+.hamburger span{ width:22px; height:2px; background:var(--text); }
 
 /* ---------- Hero ---------- */
-.hero{ position:relative; padding:180px 0 100px; overflow:hidden; }
-.hero::before{
-    content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px;
-    background:radial-gradient(circle, rgba(227,168,87,.25), transparent 70%); border-radius:50%;
-    animation:float 8s ease-in-out infinite;
-}
-@keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(30px);} }
-.hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; position:relative; z-index:2; }
-.eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-deep); background:rgba(227,168,87,.12); padding:6px 14px; border-radius:20px; margin-bottom:24px; }
-.eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold-deep); animation:pulse 1.6s infinite; }
+.hero{ position:relative; z-index:2; padding:180px 0 100px; min-height:100vh; display:flex; align-items:center; }
+.hero-inner{ text-align:center; max-width:820px; margin:0 auto; }
+.badge-eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--cyan); padding:7px 16px; border-radius:20px; margin-bottom:28px; }
+.badge-eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); animation:pulse 1.6s infinite; }
 @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
-.hero h1{ font-size:3.6rem; font-weight:700; line-height:1.1; letter-spacing:-.01em; }
-.hero h1 .accent{ color:var(--gold-deep); font-style:italic; font-weight:600; }
-.hero p.lead{ font-size:1.15rem; color:var(--muted); margin-top:22px; max-width:480px; line-height:1.7; }
-.hero-ctas{ display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; }
-.btn-primary{ background:var(--ink); color:#fff; padding:15px 30px; border-radius:8px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:all .3s ease; box-shadow:0 8px 24px rgba(11,43,38,.18); }
-.btn-primary:hover{ background:var(--gold-deep); transform:translateY(-3px); box-shadow:0 12px 28px rgba(196,136,58,.3); }
-.btn-secondary{ border:1.5px solid var(--ink); color:var(--ink); padding:15px 30px; border-radius:8px; font-weight:600; text-decoration:none; transition:all .3s ease; }
-.btn-secondary:hover{ background:var(--ink); color:#fff; }
+.hero h1{ font-size:4rem; font-weight:700; line-height:1.08; letter-spacing:-.02em; }
+.hero h1 .grad{ background:var(--grad-1); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.hero p.lead{ font-size:1.15rem; color:var(--muted); margin:26px auto 0; max-width:560px; line-height:1.7; }
+.hero-ctas{ display:flex; gap:16px; justify-content:center; margin-top:40px; flex-wrap:wrap; }
+.btn-primary-grad{ background:var(--grad-1); color:#06070C; padding:15px 30px; border-radius:12px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:all .3s ease; }
+.btn-primary-grad:hover{ transform:translateY(-3px); box-shadow:0 14px 34px rgba(124,108,246,.35); }
+.btn-ghost{ border:1px solid var(--border); color:var(--text); padding:15px 30px; border-radius:12px; font-weight:600; text-decoration:none; transition:all .3s ease; }
+.btn-ghost:hover{ background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.2); }
 
-.hero-card{ background:var(--paper-2); border-radius:20px; padding:34px; box-shadow:0 20px 60px rgba(11,43,38,.12); position:relative; }
-.hero-card h4{ font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-deep); font-family:'IBM Plex Mono',monospace; margin-bottom:20px; }
-.check-item{ display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; font-size:.95rem; }
-.check-item:last-child{ margin-bottom:0; }
-.check-item i{ color:var(--gold-deep); margin-top:3px; }
+/* Floating badges around hero */
+.float-badge{ position:absolute; padding:12px 16px; display:flex; align-items:center; gap:10px; font-size:.82rem; animation:float 5s ease-in-out infinite; }
+.float-badge i{ color:var(--cyan); }
+.fb-1{ top:22%; left:6%; animation-delay:.2s; }
+.fb-2{ top:30%; right:6%; animation-delay:1s; }
+.fb-3{ bottom:14%; left:10%; animation-delay:1.8s; }
+@keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
 
-/* ---------- Stats ---------- */
-.stats-strip{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:44px 0; margin-top:20px; }
-.stats-grid{ display:grid; grid-template-columns:repeat(3,1fr); text-align:center; }
-.stat-num{ font-family:'IBM Plex Mono',monospace; font-size:2.4rem; font-weight:600; color:var(--ink); }
-.stat-label{ color:var(--muted); font-size:.82rem; text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
+/* Dashboard preview mock */
+.dash-preview{ max-width:920px; margin:64px auto 0; padding:18px; position:relative; }
+.dash-preview .dash-topbar{ display:flex; gap:6px; padding:0 8px 14px; }
+.dash-preview .dash-dot{ width:10px; height:10px; border-radius:50%; }
+.dash-body{ display:grid; grid-template-columns:180px 1fr; gap:16px; }
+.dash-side{ background:rgba(255,255,255,.02); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px; }
+.dash-side .bar{ height:9px; border-radius:5px; background:rgba(255,255,255,.06); }
+.dash-side .bar.active{ background:var(--grad-1); opacity:.8; }
+.dash-main{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.dash-card{ background:rgba(255,255,255,.03); border:1px solid var(--border-soft); border-radius:12px; padding:16px; }
+.dash-card .num{ font-family:'IBM Plex Mono',monospace; font-size:1.3rem; font-weight:600; }
+.dash-card .lbl{ font-size:.72rem; color:var(--muted); margin-top:4px; }
+.dash-chart{ grid-column:1/-1; height:90px; display:flex; align-items:flex-end; gap:6px; padding-top:10px; }
+.dash-chart .bar-col{ flex:1; border-radius:4px 4px 0 0; background:var(--grad-1); opacity:.7; animation:growUp 1.2s ease forwards; transform-origin:bottom; transform:scaleY(0); }
 
-/* ---------- Section heading ---------- */
-.section{ padding:110px 0; }
-.section-head{ text-align:center; max-width:600px; margin:0 auto 60px; }
-.section-head .eyebrow{ margin-bottom:16px; }
-.section-head h2{ font-size:2.3rem; font-weight:700; }
+@keyframes growUp{ to{ transform:scaleY(1); } }
 
-/* ---------- Level Path (signature element) ---------- */
-.level-path{ display:flex; align-items:stretch; gap:0; position:relative; margin-top:20px; }
-.level-path::before{ content:''; position:absolute; top:34px; left:5%; right:5%; height:2px; background:var(--line); }
-.level-path .level-line-fill{ position:absolute; top:34px; left:5%; height:2px; background:var(--gold); width:0; transition:width 1.4s ease; }
-.level-path.in .level-line-fill{ width:90%; }
-.level-step{ flex:1; text-align:center; position:relative; padding:0 12px; }
-.level-num{ width:68px; height:68px; border-radius:50%; background:var(--paper-2); border:2px solid var(--line); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); position:relative; z-index:2; transition:all .3s ease; }
-.level-step:hover .level-num{ border-color:var(--gold); background:var(--gold); color:#fff; transform:scale(1.08); }
-.level-step h4{ font-size:1.05rem; margin-bottom:10px; }
-.level-step ul{ list-style:none; font-size:.85rem; color:var(--muted); line-height:1.9; }
+/* ---------- Stats strip ---------- */
+.stats-strip{ position:relative; z-index:2; padding:50px 0; }
+.stats-grid{ display:grid; grid-template-columns:repeat(3,1fr); text-align:center; padding:36px 0; }
+.stat-num{ font-family:'IBM Plex Mono',monospace; font-size:2.3rem; font-weight:600; background:var(--grad-1); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.stat-label{ color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
 
-/* ---------- Feature / Course cards ---------- */
-.card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:24px; }
-.subject-card{ background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:26px; transition:all .35s ease; position:relative; overflow:hidden; }
-.subject-card::before{ content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--gold); transform:scaleY(0); transform-origin:bottom; transition:transform .35s ease; }
-.subject-card:hover{ transform:translateY(-6px); box-shadow:0 16px 36px rgba(11,43,38,.1); }
-.subject-card:hover::before{ transform:scaleY(1); }
-.subject-card i{ font-size:1.4rem; color:var(--gold-deep); margin-bottom:14px; display:block; }
-.subject-card h4{ font-size:1rem; margin-bottom:4px; }
-.subject-card span{ color:var(--muted); font-size:.82rem; }
+/* ---------- Sections ---------- */
+.section{ position:relative; z-index:2; padding:110px 0; }
+.section-head{ text-align:center; max-width:640px; margin:0 auto 60px; }
+.section-head h2{ font-size:2.4rem; font-weight:700; margin-top:16px; letter-spacing:-.01em; }
+.section-head p{ color:var(--muted); margin-top:14px; font-size:1.02rem; }
 
-/* ---------- Tutors ---------- */
-.tutor-card{ background:var(--paper-2); border-radius:16px; padding:30px; text-align:center; border:1px solid var(--line); transition:all .35s ease; }
-.tutor-card:hover{ transform:translateY(-6px); box-shadow:0 16px 36px rgba(11,43,38,.1); }
-.tutor-avatar{ width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--ink),var(--ink-2)); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; font-size:1.4rem; margin:0 auto 16px; }
-.tutor-card h4{ font-size:1.05rem; margin-bottom:4px; }
-.tutor-card .qual{ color:var(--muted); font-size:.82rem; margin-bottom:14px; }
-.tutor-badge{ display:inline-block; font-size:.72rem; background:var(--paper); border:1px solid var(--line); padding:3px 12px; border-radius:20px; margin:2px 3px; color:var(--muted); }
+/* Feature cards */
+.feature-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.feature-card{ padding:28px; transition:all .35s ease; }
+.feature-card:hover{ transform:translateY(-6px); border-color:rgba(124,108,246,.4); box-shadow:0 20px 50px rgba(124,108,246,.12); }
+.feature-icon{ width:46px; height:46px; border-radius:12px; background:var(--grad-1); display:flex; align-items:center; justify-content:center; margin-bottom:18px; font-size:1.1rem; }
+.feature-card h4{ font-size:1.05rem; margin-bottom:8px; font-weight:600; }
+.feature-card p{ color:var(--muted); font-size:.9rem; line-height:1.6; }
 
-/* ---------- Admission ---------- */
-.admission{ background:var(--ink); color:#fff; border-radius:28px; padding:70px; position:relative; overflow:hidden; }
-.admission::before{ content:''; position:absolute; bottom:-150px; left:-100px; width:400px; height:400px; background:radial-gradient(circle,rgba(227,168,87,.18),transparent 70%); border-radius:50%; }
+/* How it works */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; }
+.step-card{ padding:30px; position:relative; }
+.step-num{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--cyan); margin-bottom:16px; display:block; }
+.step-card h4{ font-size:1.1rem; margin-bottom:10px; }
+.step-card p{ color:var(--muted); font-size:.9rem; line-height:1.6; }
+
+/* Level path / courses */
+.level-tag{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.7rem; padding:4px 10px; border-radius:20px; background:rgba(124,108,246,.15); color:var(--violet); margin-bottom:14px; }
+.subject-card{ padding:22px; transition:all .3s ease; }
+.subject-card:hover{ transform:translateY(-4px); border-color:rgba(76,201,240,.35); }
+.subject-card i{ color:var(--cyan); font-size:1.2rem; margin-bottom:12px; display:block; }
+.subject-card h4{ font-size:.98rem; margin-bottom:2px; }
+.subject-card span{ color:var(--muted); font-size:.78rem; }
+
+/* Tutors */
+.tutor-card{ padding:28px; text-align:center; transition:all .3s ease; }
+.tutor-card:hover{ transform:translateY(-6px); border-color:rgba(240,180,41,.35); }
+.tutor-avatar{ width:60px; height:60px; border-radius:50%; background:var(--grad-1); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; margin:0 auto 14px; }
+.tutor-card h4{ font-size:1rem; margin-bottom:3px; }
+.tutor-card .qual{ color:var(--muted); font-size:.8rem; margin-bottom:14px; }
+.tutor-badge{ display:inline-block; font-size:.7rem; background:rgba(255,255,255,.05); padding:3px 10px; border-radius:20px; margin:2px 3px; color:var(--muted); border:1px solid var(--border-soft); }
+
+/* Testimonials */
+.testi-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.testi-card{ padding:28px; }
+.testi-stars{ color:var(--amber); font-size:.8rem; margin-bottom:14px; }
+.testi-card p{ color:var(--text); font-size:.92rem; line-height:1.7; opacity:.85; }
+.testi-who{ margin-top:18px; font-size:.82rem; color:var(--muted); }
+
+/* FAQ */
+.faq-item{ border-bottom:1px solid var(--border-soft); padding:22px 0; cursor:pointer; }
+.faq-item:first-child{ border-top:1px solid var(--border-soft); }
+.faq-q{ display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:1rem; }
+.faq-q i{ transition:transform .3s ease; color:var(--muted); }
+.faq-item.open .faq-q i{ transform:rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.faq-item.open .faq-a{ max-height:200px; }
+.faq-a p{ color:var(--muted); padding-top:14px; font-size:.9rem; line-height:1.7; }
+
+/* Admission / CTA */
+.admission-wrap{ padding:60px; position:relative; overflow:hidden; }
+.admission-wrap::before{ content:''; position:absolute; top:-100px; right:-100px; width:340px; height:340px; background:var(--grad-1); filter:blur(100px); opacity:.25; border-radius:50%; }
 .admission-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; position:relative; z-index:2; align-items:center; }
-.admission h2{ font-size:2.1rem; margin-bottom:16px; }
-.admission p{ color:#c9d3cf; line-height:1.7; }
-.field{ position:relative; margin-bottom:20px; }
+.field{ margin-bottom:18px; }
 .field input, .field textarea{
-    width:100%; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15);
-    border-radius:8px; padding:16px; color:#fff; font-family:'Inter',sans-serif; font-size:.9rem; transition:all .25s ease;
+    width:100%; background:rgba(255,255,255,.04); border:1px solid var(--border);
+    border-radius:10px; padding:15px; color:var(--text); font-family:'Inter',sans-serif; font-size:.9rem; transition:all .25s ease;
 }
-.field input::placeholder, .field textarea::placeholder{ color:#8fa39c; }
-.field input:focus, .field textarea:focus{ outline:none; border-color:var(--gold); background:rgba(255,255,255,.1); }
-.btn-submit{ width:100%; background:var(--gold); color:var(--ink); border:none; padding:16px; border-radius:8px; font-weight:700; font-size:.95rem; cursor:pointer; transition:all .3s ease; }
-.btn-submit:hover{ background:#fff; transform:translateY(-2px); }
-.success-box{ background:rgba(227,168,87,.15); border:1px solid var(--gold); color:#fce7c5; padding:14px 18px; border-radius:8px; margin-bottom:20px; font-size:.9rem; }
+.field input::placeholder, .field textarea::placeholder{ color:var(--muted-2); }
+.field input:focus, .field textarea:focus{ outline:none; border-color:var(--violet); background:rgba(124,108,246,.06); }
+.btn-submit-grad{ width:100%; background:var(--grad-1); color:#06070C; border:none; padding:16px; border-radius:10px; font-weight:700; font-size:.95rem; cursor:pointer; transition:all .3s ease; }
+.btn-submit-grad:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(124,108,246,.35); }
+.success-box{ background:rgba(76,201,240,.1); border:1px solid rgba(76,201,240,.3); color:#9fe3f5; padding:14px 18px; border-radius:10px; margin-bottom:20px; font-size:.9rem; }
 
-/* ---------- Footer ---------- */
-footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); }
+/* Footer */
+footer.site-footer{ position:relative; z-index:2; padding:50px 0 30px; border-top:1px solid var(--border-soft); }
+.footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; align-items:center; }
+.footer-links{ display:flex; gap:24px; list-style:none; flex-wrap:wrap; }
+.footer-links a{ text-decoration:none; color:var(--muted); font-size:.85rem; }
+.footer-bottom{ margin-top:30px; text-align:center; color:var(--muted-2); font-size:.8rem; }
+
+/* Back to top */
+#backToTop{ position:fixed; bottom:26px; right:26px; width:46px; height:46px; border-radius:50%; background:var(--grad-1); color:#06070C; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transition:all .3s ease; z-index:90; }
+#backToTop.show{ opacity:1; pointer-events:auto; }
+#backToTop:hover{ transform:translateY(-3px); }
 
 /* ---------- Responsive ---------- */
 @media (max-width:900px){
-    .nav-links{ position:fixed; top:0; right:-100%; width:70%; height:100vh; background:var(--paper-2); flex-direction:column; justify-content:center; gap:28px; transition:right .35s ease; box-shadow:-10px 0 30px rgba(0,0,0,.1); }
+    .nav-links{ position:fixed; top:0; right:-100%; width:75%; height:100vh; background:var(--bg-2); flex-direction:column; justify-content:center; gap:28px; transition:right .35s ease; border-left:1px solid var(--border); z-index:110; }
     .nav-links.open{ right:0; }
-    .hamburger{ display:flex; }
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero h1{ font-size:2.4rem; }
+    .hamburger{ display:flex; z-index:120; }
+    .hero h1{ font-size:2.6rem; }
+    .dash-body{ grid-template-columns:1fr; }
+    .dash-side{ flex-direction:row; flex-wrap:wrap; }
+    .dash-main{ grid-template-columns:1fr 1fr; }
     .stats-grid{ grid-template-columns:1fr; gap:24px; }
-    .level-path{ flex-direction:column; gap:24px; }
-    .level-path::before, .level-path .level-line-fill{ display:none; }
-    .admission{ padding:36px 20px; }
+    .steps{ grid-template-columns:1fr; }
+    .admission-wrap{ padding:30px 20px; }
     .admission-grid{ grid-template-columns:1fr; gap:30px; }
     .section{ padding:70px 0; }
     .hero{ padding:140px 0 60px; }
+    .float-badge{ display:none; }
 }
 </style>
 </head>
 <body>
 
-<header class="site-header" id="siteHeader">
+<div id="scrollProgress"></div>
+<div class="aurora"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<div class="noise"></div>
+
+<header class="nav" id="siteHeader">
     <div class="container nav-wrap">
-        <a href="#home" class="logo">Strong<em>Base</em></a>
+        <a href="#home" class="logo">
+            <span class="logo-mark">🎓</span> Strong Base Academy
+        </a>
         <nav class="nav-links" id="navLinks">
-            <a href="#home">Home</a>
+            <a href="#features">Features</a>
             <a href="#courses">Courses</a>
             <a href="#tutors">Tutors</a>
-            <a href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
-            <a href="#admission" class="btn-pill">Book Demo</a>
+            <a href="#faq">FAQ</a>
+            <a href="{{ route('login') }}">Sign In</a>
+            <a href="#admission" class="btn-pill">Book a Demo</a>
         </nav>
         <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
@@ -174,23 +238,47 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 
 <!-- HERO -->
 <section class="hero" id="home">
-    <div class="container hero-grid">
-        <div class="reveal in">
-            <div class="eyebrow"><span class="dot"></span> Home Tuition Academy</div>
-            <h1>Building a<br><span class="accent">strong base,</span><br>one subject at a time</h1>
-            <p class="lead">From Primary through A-Levels — qualified tutors, small groups, and monthly progress tracking. Your child's education is our responsibility.</p>
-            <div class="hero-ctas">
-                <a href="#admission" class="btn-primary">Free Demo Class <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="#courses" class="btn-secondary">Explore Courses</a>
-            </div>
+    <div class="float-badge glass fb-1"><i class="fa-solid fa-chart-line"></i> Real-time progress tracking</div>
+    <div class="float-badge glass fb-2"><i class="fa-solid fa-user-check"></i> Vetted, qualified tutors</div>
+    <div class="float-badge glass fb-3"><i class="fa-solid fa-bolt"></i> Enroll in minutes</div>
+
+    <div class="container hero-inner reveal in">
+        <div class="badge-eyebrow glass"><span class="dot"></span> Now enrolling for the new term</div>
+        <h1>The modern way to <span class="grad">learn, teach,</span> and grow.</h1>
+        <p class="lead">Strong Base Academy connects students from Primary through A-Levels with expert tutors — backed by structured attendance, transparent fees, and real progress reports.</p>
+        <div class="hero-ctas">
+            <a href="#admission" class="btn-primary-grad">Book a Free Demo Class <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#courses" class="btn-ghost">Explore Courses</a>
         </div>
-        <div class="reveal in" style="transition-delay:.15s;">
-            <div class="hero-card">
-                <h4>Kyun Strong Base?</h4>
-                <div class="check-item"><i class="fa-solid fa-circle-check"></i> Subject-wise qualified tutors</div>
-                <div class="check-item"><i class="fa-solid fa-circle-check"></i> Monthly progress reports</div>
-                <div class="check-item"><i class="fa-solid fa-circle-check"></i> Attendance aur regular tests</div>
-                <div class="check-item"><i class="fa-solid fa-circle-check"></i> Affordable, transparent fees</div>
+
+        <div class="dash-preview glass reveal in" style="transition-delay:.2s;">
+            <div class="dash-topbar">
+                <span class="dash-dot" style="background:#F65C9C;"></span>
+                <span class="dash-dot" style="background:#F0B429;"></span>
+                <span class="dash-dot" style="background:#4CC9F0;"></span>
+            </div>
+            <div class="dash-body">
+                <div class="dash-side">
+                    <div class="bar active" style="width:70%;"></div>
+                    <div class="bar" style="width:50%;"></div>
+                    <div class="bar" style="width:60%;"></div>
+                    <div class="bar" style="width:40%;"></div>
+                    <div class="bar" style="width:55%;"></div>
+                </div>
+                <div class="dash-main">
+                    <div class="dash-card"><div class="num">248</div><div class="lbl">Active Students</div></div>
+                    <div class="dash-card"><div class="num">32</div><div class="lbl">Expert Tutors</div></div>
+                    <div class="dash-card"><div class="num">98%</div><div class="lbl">Attendance Rate</div></div>
+                    <div class="dash-chart">
+                        <div class="bar-col" style="height:40%; animation-delay:.1s;"></div>
+                        <div class="bar-col" style="height:65%; animation-delay:.2s;"></div>
+                        <div class="bar-col" style="height:45%; animation-delay:.3s;"></div>
+                        <div class="bar-col" style="height:80%; animation-delay:.4s;"></div>
+                        <div class="bar-col" style="height:55%; animation-delay:.5s;"></div>
+                        <div class="bar-col" style="height:90%; animation-delay:.6s;"></div>
+                        <div class="bar-col" style="height:70%; animation-delay:.7s;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -198,14 +286,14 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 
 <!-- STATS -->
 <section class="stats-strip">
-    <div class="container stats-grid reveal">
+    <div class="container glass stats-grid reveal">
         <div>
             <div class="stat-num" data-count="{{ $tutors->count() }}">0</div>
-            <div class="stat-label">Tutors</div>
+            <div class="stat-label">Expert Tutors</div>
         </div>
         <div>
             <div class="stat-num" data-count="{{ $subjects->flatten()->count() }}">0</div>
-            <div class="stat-label">Subjects</div>
+            <div class="stat-label">Subjects Offered</div>
         </div>
         <div>
             <div class="stat-num" data-count="{{ $subjects->keys()->count() }}">0</div>
@@ -214,50 +302,89 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
     </div>
 </section>
 
-<!-- LEVELS -->
-<section class="section" id="courses">
+<!-- FEATURES -->
+<section class="section" id="features">
     <div class="container">
         <div class="section-head reveal">
-            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> What We Teach</div>
-            <h2>Courses by Level</h2>
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Why Strong Base</div>
+            <h2>Built for outcomes, not just attendance.</h2>
+            <p>Every feature is designed around one goal: measurable academic progress.</p>
         </div>
-        <div class="level-path reveal">
-            <div class="level-line-fill"></div>
-            @forelse ($subjects as $level => $subjectsInLevel)
-                <div class="level-step">
-                    <div class="level-num">{{ $loop->iteration }}</div>
-                    <h4>{{ $level }}</h4>
-                    <ul>
-                        @foreach ($subjectsInLevel as $subject)
-                            <li>{{ $subject->name }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @empty
-                <p style="text-align:center; color:var(--muted);">Subjects jald hi add honge.</p>
-            @endforelse
+        <div class="feature-grid reveal-stagger">
+            <div class="feature-card glass">
+                <div class="feature-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                <h4>Qualified Tutors</h4>
+                <p>Every tutor is vetted for subject expertise, not just availability.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h4>Progress Reports</h4>
+                <p>Monthly, data-backed reports so you always know where your child stands.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <h4>Verified Attendance</h4>
+                <p>Every session is logged — no guesswork, no missed classes unnoticed.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <h4>Transparent Fees</h4>
+                <p>Clear monthly pricing with digital receipts — no hidden charges, ever.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ALL SUBJECTS -->
-<section class="section" style="background:var(--paper-2); padding-top:0;">
+<!-- HOW IT WORKS -->
+<section class="section" style="padding-top:0;">
     <div class="container">
         <div class="section-head reveal">
-            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Detail</div>
-            <h2>All Subjects</h2>
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Getting Started</div>
+            <h2>Three steps to your first class.</h2>
         </div>
-        <div class="card-grid reveal-stagger">
-            @forelse ($subjects->flatten() as $subject)
-                <div class="subject-card">
-                    <i class="fa-solid fa-book-open"></i>
-                    <h4>{{ $subject->name }}</h4>
-                    <span>{{ $subject->level }}</span>
+        <div class="steps reveal-stagger">
+            <div class="step-card glass">
+                <span class="step-num">STEP 01</span>
+                <h4>Book a Free Demo</h4>
+                <p>Tell us the subject and level — we'll schedule a no-obligation trial class.</p>
+            </div>
+            <div class="step-card glass">
+                <span class="step-num">STEP 02</span>
+                <h4>Get Matched</h4>
+                <p>We pair your child with a tutor suited to their subject and learning pace.</p>
+            </div>
+            <div class="step-card glass">
+                <span class="step-num">STEP 03</span>
+                <h4>Track Progress</h4>
+                <p>Attendance, test results, and monthly reports — all in one place.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COURSES -->
+<section class="section" id="courses">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Curriculum</div>
+            <h2>Courses across every level.</h2>
+        </div>
+        @forelse ($subjects as $level => $subjectsInLevel)
+            <div class="mb-4 reveal" style="margin-bottom:36px;">
+                <span class="level-tag">{{ $level }}</span>
+                <div class="feature-grid">
+                    @foreach ($subjectsInLevel as $subject)
+                        <div class="subject-card glass">
+                            <i class="fa-solid fa-book-open"></i>
+                            <h4>{{ $subject->name }}</h4>
+                            <span>{{ $subject->level }}</span>
+                        </div>
+                    @endforeach
                 </div>
-            @empty
-                <p style="color:var(--muted);">Subjects jald hi add honge.</p>
-            @endforelse
-        </div>
+            </div>
+        @empty
+            <p style="text-align:center; color:var(--muted);">Subjects will be listed here soon.</p>
+        @endforelse
     </div>
 </section>
 
@@ -265,12 +392,12 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 <section class="section" id="tutors">
     <div class="container">
         <div class="section-head reveal">
-            <div class="eyebrow" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Our Team</div>
-            <h2>Qualified Tutors</h2>
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Our Team</div>
+            <h2>Meet a few of our tutors.</h2>
         </div>
-        <div class="card-grid reveal-stagger">
+        <div class="feature-grid reveal-stagger">
             @forelse ($tutors as $tutor)
-                <div class="tutor-card">
+                <div class="tutor-card glass">
                     <div class="tutor-avatar">{{ strtoupper(substr($tutor->user->name,0,1)) }}</div>
                     <h4>{{ $tutor->user->name }}</h4>
                     <div class="qual">{{ $tutor->qualification ?? 'Subject Expert' }}</div>
@@ -281,8 +408,63 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
                     </div>
                 </div>
             @empty
-                <p style="color:var(--muted);">Tutors jald hi add honge.</p>
+                <p style="color:var(--muted);">Tutor profiles will be listed here soon.</p>
             @endforelse
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS (sample placeholders) -->
+<section class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> Testimonials</div>
+            <h2>What families are saying.</h2>
+        </div>
+        <div class="testi-grid reveal-stagger">
+            <div class="testi-card glass">
+                <div class="testi-stars">★★★★★</div>
+                <p>"The monthly progress reports finally gave us visibility into how our daughter is actually doing — not just her grades, but her attendance and effort too."</p>
+                <div class="testi-who">— Parent of a Matric student</div>
+            </div>
+            <div class="testi-card glass">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Switching tutors used to mean starting over. Here, everything is tracked, so the next tutor already knows exactly where my son left off."</p>
+                <div class="testi-who">— Parent of an FSc student</div>
+            </div>
+            <div class="testi-card glass">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Transparent fees and digital receipts — no more confusion about what's paid and what's due. It's a small thing that makes a big difference."</p>
+                <div class="testi-who">— Parent of an O-Level student</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+    <div class="container" style="max-width:760px;">
+        <div class="section-head reveal">
+            <div class="badge-eyebrow glass" style="margin-left:auto;margin-right:auto;"><span class="dot"></span> FAQ</div>
+            <h2>Frequently asked questions.</h2>
+        </div>
+        <div class="reveal">
+            <div class="faq-item">
+                <div class="faq-q">How do I book a free demo class? <i class="fa-solid fa-plus"></i></div>
+                <div class="faq-a"><p>Fill out the admission form below with your child's name, class level, and contact number. Our team will reach out within 24 hours to schedule a free trial session.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How are tutors matched to students? <i class="fa-solid fa-plus"></i></div>
+                <div class="faq-a"><p>Tutors are matched based on subject expertise and the student's class level, ensuring the right fit from the very first class.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How do fee payments work? <i class="fa-solid fa-plus"></i></div>
+                <div class="faq-a"><p>Fees are billed monthly with a clear due date. You'll receive a digital receipt for every payment, and reminders are sent for anything outstanding.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I track my child's attendance? <i class="fa-solid fa-plus"></i></div>
+                <div class="faq-a"><p>Yes — every class session is logged by the tutor in real time, so attendance records are always accurate and up to date.</p></div>
+            </div>
         </div>
     </div>
 </section>
@@ -290,12 +472,12 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 <!-- ADMISSION -->
 <section class="section" id="admission" style="padding-top:0;">
     <div class="container">
-        <div class="admission reveal">
+        <div class="admission-wrap glass reveal">
             <div class="admission-grid">
                 <div>
-                    <div class="eyebrow" style="background:rgba(227,168,87,.15);"><span class="dot"></span> Admission Inquiry</div>
-                    <h2>Book a Free Demo Class</h2>
-                    <p>Fill out the form and our team will get back to you within 24 hours.</p>
+                    <div class="badge-eyebrow glass"><span class="dot"></span> Admission Inquiry</div>
+                    <h2 style="font-size:2rem; margin-bottom:16px;">Book your free demo class today.</h2>
+                    <p style="color:var(--muted); line-height:1.7;">Fill out the form and our team will get back to you within 24 hours to schedule a trial session.</p>
                 </div>
                 <div>
                     @if(session('success'))
@@ -307,7 +489,7 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
                         <div class="field"><input type="text" name="phone" placeholder="Phone number" value="{{ old('phone') }}" required></div>
                         <div class="field"><input type="text" name="class_level" placeholder="Class / Level (e.g. Class 9, FSc)" value="{{ old('class_level') }}" required></div>
                         <div class="field"><textarea name="message" rows="3" placeholder="Additional details (optional)">{{ old('message') }}</textarea></div>
-                        <button type="submit" class="btn-submit">Send Inquiry</button>
+                        <button type="submit" class="btn-submit-grad">Send Inquiry</button>
                     </form>
                 </div>
             </div>
@@ -316,22 +498,45 @@ footer.site-footer{ padding:40px 0; text-align:center; color:var(--muted); font-
 </section>
 
 <footer class="site-footer">
-    &copy; {{ date('Y') }} Strong Base Academy. All rights reserved.
+    <div class="container">
+        <div class="footer-grid">
+            <a href="#home" class="logo"><span class="logo-mark">🎓</span> Strong Base Academy</a>
+            <ul class="footer-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#tutors">Tutors</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="{{ route('login') }}">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">&copy; {{ date('Y') }} Strong Base Academy. All rights reserved.</div>
+    </div>
 </footer>
 
-<script>
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('in');
-    });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal, .reveal-stagger, .level-path').forEach(el => observer.observe(el));
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-// Header scroll state
+<script>
+// Scroll progress bar
+const progressBar = document.getElementById('scrollProgress');
 window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+
     document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 40);
+    document.getElementById('backToTop').classList.toggle('show', window.scrollY > 500);
 });
+
+// Back to top
+document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
 
 // Mobile menu
 const hamburger = document.getElementById('hamburger');
@@ -358,6 +563,25 @@ const counterObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 counters.forEach(c => counterObserver.observe(c));
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    });
+});
+
+// Mouse parallax on hero float badges
+document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.querySelectorAll('.float-badge').forEach((el, i) => {
+        const factor = (i + 1) * 0.4;
+        el.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+    });
+});
 </script>
 
 </body>
