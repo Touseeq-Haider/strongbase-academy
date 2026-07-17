@@ -36,7 +36,7 @@
                     </td>
                     <td class="text-end">
                         <a href="{{ route('admin.tutors.edit', $tutor) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this tutor?');">
+                        <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event, '{{ $tutor->user->name }}')">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
