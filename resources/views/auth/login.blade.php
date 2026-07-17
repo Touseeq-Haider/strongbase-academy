@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Strong Base Academy</title>
+    @include('partials.favicon')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -18,7 +19,8 @@
 </head>
 <body>
     <div class="card login-card p-4">
-        <h4 class="text-center mb-1">🎓 Strong Base Academy</h4>
+        <img src="{{ asset('favicon.svg') }}" alt="Strong Base Academy" width="52" height="52" style="border-radius:12px; display:block; margin:0 auto 14px;">
+        <h4 class="text-center mb-1">Strong Base Academy</h4>
         <p class="text-center text-muted mb-4">Admin / Tutor Login</p>
 
         @if ($errors->any())

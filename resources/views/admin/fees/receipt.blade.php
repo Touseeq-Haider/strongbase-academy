@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Receipt - {{ $fee->student->name }}</title>
+@include('partials.favicon')
 <style>
     body{ font-family: 'Segoe UI', Arial, sans-serif; background:#eee; margin:0; padding:30px; }
     .receipt{ max-width:600px; margin:auto; background:#fff; padding:40px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.1); }

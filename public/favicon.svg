@@ -1,0 +1,22 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C6CF6"/>
+      <stop offset="100%" stop-color="#4CC9F0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle background -->
+  <rect x="0" y="0" width="512" height="512" rx="118" fill="url(#grad)"/>
+
+  <!-- Base line: the "strong base" -->
+  <rect x="128" y="336" width="256" height="26" rx="13" fill="#FFFFFF"/>
+
+  <!-- Growth bars rising from the base -->
+  <rect x="150" y="256" width="40" height="80" rx="12" fill="#FFFFFF" opacity="0.55"/>
+  <rect x="236" y="204" width="40" height="132" rx="12" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="322" y="150" width="40" height="186" rx="12" fill="#FFFFFF"/>
+
+  <!-- Achievement accent dot -->
+  <circle cx="342" cy="122" r="16" fill="#F0B429"/>
+</svg>

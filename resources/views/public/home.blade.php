@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Strong Base Academy — Premium Tutoring, Reimagined</title>
+@include('partials.favicon')
 <meta name="description" content="Strong Base Academy pairs students from Primary through A-Levels with expert tutors, real-time progress tracking, and a modern learning experience.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -58,7 +59,7 @@ header.nav{ position:fixed; top:0; left:0; width:100%; z-index:100; padding:18px
 header.nav.scrolled{ padding:12px 0; background:rgba(6,7,12,.7); backdrop-filter:blur(16px); border-bottom:1px solid var(--border-soft); }
 .nav-wrap{ display:flex; align-items:center; justify-content:space-between; }
 .logo{ display:flex; align-items:center; gap:9px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem; text-decoration:none; }
-.logo-mark{ width:30px; height:30px; border-radius:9px; background:var(--grad-1); display:flex; align-items:center; justify-content:center; font-size:.85rem; box-shadow:0 0 24px rgba(124,108,246,.5); }
+.logo-mark{ width:30px; height:30px; border-radius:9px; box-shadow:0 0 24px rgba(124,108,246,.5); }
 .nav-links{ display:flex; align-items:center; gap:30px; list-style:none; }
 .nav-links a:not(.btn-pill){ text-decoration:none; color:var(--muted); font-size:.9rem; font-weight:500; transition:color .2s ease; }
 .nav-links a:not(.btn-pill):hover{ color:var(--text); }
@@ -222,7 +223,7 @@ footer.site-footer{ position:relative; z-index:2; padding:50px 0 30px; border-to
 <header class="nav" id="siteHeader">
     <div class="container nav-wrap">
         <a href="#home" class="logo">
-            <span class="logo-mark">🎓</span> Strong Base Academy
+            <img src="{{ asset('favicon.svg') }}" alt="Strong Base Academy" class="logo-mark"> Strong Base Academy
         </a>
         <nav class="nav-links" id="navLinks">
             <a href="#features">Features</a>
@@ -500,7 +501,7 @@ footer.site-footer{ position:relative; z-index:2; padding:50px 0 30px; border-to
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <a href="#home" class="logo"><span class="logo-mark">🎓</span> Strong Base Academy</a>
+            <a href="#home" class="logo"><img src="{{ asset('favicon.svg') }}" alt="Strong Base Academy" class="logo-mark"> Strong Base Academy</a>
             <ul class="footer-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#courses">Courses</a></li>

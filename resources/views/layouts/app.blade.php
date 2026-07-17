@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Strong Base Academy')</title>
+    @include('partials.favicon')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -103,7 +104,7 @@
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     <div class="sidebar" id="sidebar">
         <button class="sidebar-close-btn" id="sidebarClose"><i class="fa-solid fa-xmark"></i></button>
-        <div class="brand">🎓 Strong Base Academy</div>
+        <div class="brand"><img src="{{ asset('favicon.svg') }}" alt="Strong Base Academy" width="24" height="24" style="border-radius:6px; vertical-align:-5px; margin-right:6px;"> Strong Base Academy</div>
         <nav class="mt-2">
             <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <i class="fa-solid fa-gauge"></i> Dashboard

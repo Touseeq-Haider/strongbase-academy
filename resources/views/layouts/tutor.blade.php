@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Tutor Panel')</title>
+    @include('partials.favicon')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -22,7 +23,7 @@
 </head>
 <body>
 <nav class="navbar navbar-dark px-3 px-md-4 py-3 tutor-navbar" style="background:#1e2a3a;">
-    <a class="navbar-brand mb-2 mb-md-0" href="{{ route('tutor.dashboard') }}">🎓 Strong Base Academy — Tutor</a>
+    <a class="navbar-brand mb-2 mb-md-0" href="{{ route('tutor.dashboard') }}"><img src="{{ asset('favicon.svg') }}" alt="Strong Base Academy" width="24" height="24" style="border-radius:6px; vertical-align:-5px; margin-right:6px;"> Strong Base Academy — Tutor</a>
     <div class="nav-links">
         <a href="{{ route('tutor.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
         <a href="{{ route('tutor.attendance.select') }}" class="btn btn-sm btn-outline-light">Mark Attendance</a>
